@@ -1,3 +1,4 @@
+from .auth import User
 import sqlite3
 def sk_lvl_test(sk_lvl):
     global S_SK_LVL

@@ -13,7 +13,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 #f'(x) = x-1
 from flask_login import login_user, login_required, logout_user,current_user
 #current_user can be used to access all the information about the user
-
+from .auth import User
 auth = Blueprint('auth',__name__) 
 
 @auth.route('/login',methods=['GET','POST'])

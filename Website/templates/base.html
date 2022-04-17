@@ -17,6 +17,9 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Righteous&display=swap');
+    </style>
     <!--this is the jinja syntax--><!--this can be overwritten-->
     <title>{% block title %}HOME{% endblock %}</title>
 </head>
@@ -39,31 +42,22 @@
     
     <!--using double curly braces you can write python expression in this in the html file -->
     
-    <nav class = "navbar navbar-expand-lg navbar-dark bg-dark justify-content-between"><!--This is bootstrap syntax-->
-        <button class = "navbar-toggler" type = "button" data-toggle="collapse" data-target = "#navbar">
+    <nav class = "navbar navbar-expand-lg navbar-light" style="background-color: #98e591;"><!--This is bootstrap syntax-->
+      <a class="navbar-brand" href="#" style="font-family: lobster, cursive; color: #84745e;">Beanstalk</a>  
+      <button class = "navbar-toggler" type = "button" data-toggle="collapse" data-target = "#navbar">
             <span class = "navbar-toggler-icon"></span>
         </button>
-        <div class = "collapse navbar-collapse" id = "navbar">
-            <div class = "navbar-nav navbar-right ms-auto">
+        <div class = "collapse navbar-collapse justify-content-end" id = "navbar">
+            <div class = "navbar-nav">
               {% if user.is_authenticated %}
-              <ul class = "nav navbar-nav navbar-right">
-                <li>
-                  <a class = "nav-item nav-link" id = "home" href = "/" >Home</a>
-                </li>
-                <li>
-                  <a class = "nav-item nav-link" id = "logout" href = "/logout">Logout</a>
-                </li>
-                {% else %}
-                <li>
-                  <a class = "nav-item nav-link" id = "login" href = "/login">Login</a>
-                </li>
-                <li>
-                  <a class = "nav-item nav-link" id = "signup" href = "/sign-up">Signup</a>
-                </li>
-              </ul>
+              <a class="nav-item nav-link" id="home" href="/">Home</a>
+              <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+              {% else %}
+              <a class="nav-item nav-link" id="login" href="/login">Login</a>
+              <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
               {% endif %}
-            </div>
-        </div>
+             </div>
+          </div>
     </nav>
     {%with messages = get_flashed_messages(with_categories = true)%}
     

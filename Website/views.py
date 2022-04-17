@@ -164,7 +164,7 @@ def home():
     conn.commit()
     conn.close()
 
-    return render_template("home.html",data = qp) 
+    return render_template("home.html",data = qp,user = current_user) 
     #with user = current_users
     #we will be able to reference the user in our current template to check whether the user is authenticated or not
 

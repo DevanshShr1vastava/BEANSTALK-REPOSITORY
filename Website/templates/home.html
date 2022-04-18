@@ -1,24 +1,38 @@
-<!--Here we will inherit templates using extend-->
-{% extends "base.html" %} 
-{% block title %}Home{% endblock %} 
-{% block content %}
-<h1 align = "center">MCQ</h1>
-<form>
-  {%for i in data%}
-  <div>
-    <label>{{i[0]}}</label>
-    <br>
-    <input type = "radio" id = "op" name = "op" value = 'op1'>{{i[1]}}
-    <br>
-    <input type = "radio" id = "op" name = "op" value = 'op2'>{{i[2]}}
-    <br>
-    <input type = "radio" id = "op" name = "op" value = 'op3'>{{i[3]}}
-    <br>
-    <input type = "radio" id = "op" name = "op" value = 'op4'>{{i[4]}}
-    <hr>
-  </div>
-  {%endfor%}
-  <br>
-  <input type = "submit" value = "Submit">
-</form>
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+{% block content %} 
+<style>
+  * {padding: 0;margin: 0;}
+  
+</style>
+<div id="body" style="background-color: burlywood; height: auto; width: 100%;">
+  <center>
+    <br><br>
+    <div id="title">
+      <h1 style="font-family: lobster, cursive;color: #000;"> The Beanstalk </h1>
+    </div>
+    <br><br><br><br><br><br>
+  <button type="button" class="btn btn-outline-danger btn-lg">
+    <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
+  </button>
+</center>
+  <!--<h4>Notes</h4>
+  <ul class="list-group list-group-fluch" id="notes">
+      {% for note in user.notes %}
+      <li class="list-group-item">
+      {{ note.data }}
+      <button type="button" class="close" onclick="deleteNote({{ note.id }})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </li>
+      {% endfor %}
+  </ul>
+  <form method="POST">
+      <textarea name="note" id="note" class="form-control"></textarea>
+      <br>
+      <div align="center">
+          <button type="submit" class="btn btn-primary"> Add Note </button>
+      </div>
+  </form>-->
+</div>
 {% endblock %}

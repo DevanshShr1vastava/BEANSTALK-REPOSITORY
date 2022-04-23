@@ -2,36 +2,38 @@
 
 {% block content %} 
 <style>
-  * {padding: 0;margin: 0;}
+  * {padding: 0;margin: 0; background-image: url('/Website/templates/images/ivy.jpg'); background-size: cover;}
 </style>
-<div id="body" style="background-color: white;">
+<div id="card border-dark">
   <center>
     <br><br>
-    <div id="title">
-      <h1 style="font-family: lobster, cursive;color: #000;"> The Beanstalk </h1>
+    <div id="card-title">
+      <h1 style="font-family: lobster, cursive; color: #84745e;"> The Beanstalk </h1>
     </div>
     <br><br><br><br><br><br>
-  <button type="button" class="btn btn-outline-danger btn-lg">
-    <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
-  </button>
-</center>
-  <!--<h4>Notes</h4>
-  <ul class="list-group list-group-fluch" id="notes">
+    <button type="button" class="btn btn-outline-danger btn-lg">
+      <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
+    </button>
+    <hr>
+    <h4>Goals</h4>
+    <h6>You can type</h6>
+    <ul class="list-group list-group-fluch" id="notes">
       {% for note in user.notes %}
       <li class="list-group-item">
-      {{ note.data }}
-      <button type="button" class="close" onclick="deleteNote({{ note.id }})">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </li>
-      {% endfor %}
-  </ul>
-  <form method="POST">
+        {{ note.data }}
+        <button type="button" class="close" onclick="deleteNote({{ note.id }})">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+    {% endfor %}
+    </ul>
+    <form method="POST">
       <textarea name="note" id="note" class="form-control"></textarea>
       <br>
       <div align="center">
-          <button type="submit" class="btn btn-primary"> Add Note </button>
+        <button type="submit" class="btn btn-primary"> Add Note </button>
       </div>
-  </form>-->
+    </form>
+  </center>
 </div>
 {% endblock %}

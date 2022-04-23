@@ -107,17 +107,17 @@ def test():
         qp = []
         for i in q_add_list:
             cur.execute("""SELECT Question FROM QB_TABLE where Q_ID = ?""",(i,))
-            question = str(cur.fetchone())
+            question = repr(cur.fetchone())
             cur.execute("""SELECT op1 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op1 = str(cur.fetchone())
+            op1 = repr(cur.fetchone())
             cur.execute("""SELECT op2 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op2 = str(cur.fetchone())
+            op2 = repr(cur.fetchone())
             cur.execute("""SELECT op3 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op3 = str(cur.fetchone())
+            op3 = repr(cur.fetchone())
             cur.execute("""SELECT op4 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op4 = str(cur.fetchone())
+            op4 = repr(cur.fetchone())
             cur.execute("""SELECT answer from QB_TABLE where Q_ID = ?""",(i,))
-            answer = str(cur.fetchone())
+            answer = repr(cur.fetchone())
             qp.append([question,op1,op2,op3,op4,answer])
 
     def randomize_values():

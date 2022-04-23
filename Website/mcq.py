@@ -1,4 +1,5 @@
 from flask import Blueprint,render_template
+import re
 from flask_login import current_user
 mcq = Blueprint ('mcq',__name__)
 @mcq.route('/mcq',methods = ["GET","POST"])
@@ -105,19 +106,22 @@ def test():
     def create_qp():
         global qp 
         qp = []
+        patt1 = r"""[(][']|[(]["]"""
+        patt2 = r"""['][,][)]|["][,][)]"""
+        
         for i in q_add_list:
             cur.execute("""SELECT Question FROM QB_TABLE where Q_ID = ?""",(i,))
-            question = repr(cur.fetchone())
+            question = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             cur.execute("""SELECT op1 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op1 = repr(cur.fetchone())
+            op1 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             cur.execute("""SELECT op2 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op2 = repr(cur.fetchone())
+            op2 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             cur.execute("""SELECT op3 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op3 = repr(cur.fetchone())
+            op3 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             cur.execute("""SELECT op4 FROM QB_TABLE where Q_ID = ?""",(i,))
-            op4 = repr(cur.fetchone())
+            op4 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             cur.execute("""SELECT answer from QB_TABLE where Q_ID = ?""",(i,))
-            answer = repr(cur.fetchone())
+            answer = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             qp.append([question,op1,op2,op3,op4,answer])
 
     def randomize_values():

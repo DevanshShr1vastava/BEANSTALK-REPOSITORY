@@ -9,12 +9,11 @@ def test():
     import random
     import pandas as pd
 
-
     def q_time_test(Q_TIME):
         global T_obs
-        if Q_TIME < 20:
+        if Q_TIME < 35:
             T_obs = 'mo'
-        elif Q_TIME >= 20 and Q_TIME <= 60:
+        elif Q_TIME >= 35 and Q_TIME <= 60:
             T_obs = 'rst'
         else:
             T_obs = 'rsq' 
@@ -86,7 +85,7 @@ def test():
                     else:
                         verdict = 'rst'
             if verdict == 'mo':
-                pass
+                pass #add any random question
             elif verdict == 'rst':
                 for j in range(len(questions_df)):
                     if (questions_df['SK_LVL'][j] == Processed_Data['SK_LVL'][i]):

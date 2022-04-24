@@ -18,9 +18,9 @@
       crossorigin="anonymous"
     />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@500&family=Righteous&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Lobster&family=Quicksand:wght@700&family=Righteous&family=Sansita+Swashed:wght@500&display=swap');;
       body {background-image: url(/Website/templates/images/forest.jpg);
-      background-size: 200px;;}
+      background-size: 200px;}
     </style>
     <!--this is the jinja syntax--><!--this can be overwritten-->
     <title>{% block title %}HOME{% endblock %}</title>
@@ -67,14 +67,14 @@
     {%if messages%}
       {%for category, message in messages%}
       {%if category == 'error'%}
-      <div class = "alert alert-danger alter-dismissable fade show" role = "alert">
-        {{ message }}
+      <div class = "alert alter-dismissable fade show" role = "alert">
+        <center>{{ message }}</center>
         <button type = "button" class = "close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span>
         </button>
       </div><!--This is for error alert-->
       {%else%}
-      <div class = "alert alert-success alter-dismissable fade show" role = "alert">
+      <div class = "alert alter-dismissable fade show" role = "alert" style="color: rgba(72, 72, 72, 0.147);">
         {{ message }}
         <button type = "button" class = "close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span>
@@ -92,7 +92,10 @@
     <script
     type = "text/javascript"
     src = "{{url_for('static',filename='index.js')}}"></script>
-
-
+<!-- Footer Starts Here -->
+  <footer class="d-block p-2 bg-dark text-white" style="margin-top:1.5%;">
+    <p style="text-align: center; color: rgba(255, 255, 255, 0.395);font-size: 15px;">Developed by The Beanstalk team.</p>
+  </footer>
+<!--Footer ends here-->
 </body>
 </html>

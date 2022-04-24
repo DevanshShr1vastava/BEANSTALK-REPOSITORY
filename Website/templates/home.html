@@ -1,22 +1,19 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}
 
 {% block content %} 
-<style>
-  * {padding: 0;margin: 0; background-image: url('/Website/templates/images/ivy.jpg'); background-size: cover;}
-</style>
-<div id="card border-dark">
+<!-- <style> body { background-image: linear-gradient(rgba(255,0,0,0), ghostwhite, rgba(255,0,0,0));} </style> -->
+<style> body { background-image: url(/Website/images/forest.jpg); background-size: cover;} </style>
+<div>
   <center>
-    <br><br>
     <div id="card-title">
-      <h1 style="font-family: lobster, cursive; color: #84745e;"> The Beanstalk </h1>
+      <h1 style="font-family: lobster, cursive; color: #84745e; padding: 3% 0 0;"> The Beanstalk </h1>
     </div>
-    <br><br><br><br><br><br>
-    <button type="button" class="btn btn-outline-danger btn-lg">
+    <button type="button" class="btn btn-outline-danger btn-lg" style="margin: 23%;">
       <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
     </button>
     <hr>
-    <h4>Goals</h4>
-    <h6>You can type</h6>
+    <h3 style="font-family: 'Sansita Swashed', cursive;text-decoration: underline;">Goals</h3>
+    <h6 style="line-height: 75px;">You can add your goals here! </h6>
     <ul class="list-group list-group-fluch" id="notes">
       {% for note in user.notes %}
       <li class="list-group-item">
@@ -31,7 +28,7 @@
       <textarea name="note" id="note" class="form-control"></textarea>
       <br>
       <div align="center">
-        <button type="submit" class="btn btn-primary"> Add Note </button>
+        <button type="submit" class="btn btn-primary"> Add Goal </button>
       </div>
     </form>
   </center>

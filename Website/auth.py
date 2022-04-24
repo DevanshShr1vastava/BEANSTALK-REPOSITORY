@@ -37,7 +37,7 @@ def login():#function to run when this page comes up
             else:
                 flash("Incorrect Password, Try Again ",category= "error")
         else:
-            flash("email does not exist ",category="error")
+            flash("Email does not exist ",category="error")
     return render_template("login.html",user = current_user)
 
 @auth.route('/logout')#localhost:5000/logout

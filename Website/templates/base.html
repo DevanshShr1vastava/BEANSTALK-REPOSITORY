@@ -74,7 +74,7 @@
         </button>
       </div><!--This is for error alert-->
       {%else%}
-      <div class = "alert alter-dismissable fade show" role = "alert" style="color: rgba(72, 72, 72, 0.147);">
+      <div class = "alert alter-dismissable fade show" role = "alert" style="color: rgb(0, 0, 0);">
         {{ message }}
         <button type = "button" class = "close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span>
@@ -93,7 +93,7 @@
     type = "text/javascript"
     src = "{{url_for('static',filename='index.js')}}"></script>
 <!-- Footer Starts Here -->
-  <footer class="d-block p-2 bg-dark text-white" style="margin-top:1.5%;">
+  <footer class="d-block p-2 bg-dark text-white" style="position: fixed; bottom: 0; margin-top:1.5%; width: 100%;">
     <p style="text-align: center; color: rgba(255, 255, 255, 0.395);font-size: 15px;">Developed by The Beanstalk team.</p>
   </footer>
 <!--Footer ends here-->

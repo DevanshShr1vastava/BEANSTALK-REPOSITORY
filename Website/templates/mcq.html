@@ -1,5 +1,6 @@
 <!--Here we will inherit templates using extend-->
 {% extends "base.html" %} 
+
 <style>
    body {
     background-color: black;
@@ -10,25 +11,30 @@
 </style>
 {% block title %}The Test{% endblock %} 
 {% block content %}
+
 <div>
   <h1 align = "center" style="font-family: 'Quicksand', sans-serif;">Multiple Choice Questions</h1>
   <br>
   <h6 align = "center" style="font-family: 'Lato', sans-serif; font-style: italic;">Select the right option for each question.</h6>
   <hr>
-    <form>
-      {%for i in data%}
-      <div class="card border-dark">
-        <div class="card-header border-secondary"> <label>Q) {{i[0]}}</label> </div>
+  {%for i in range(3)%}
+  <div class = "tab">
+    <button class = "tablinks" onclick = "OpenQuestion(event, '{{data.index(data[i])}}')" id = "defaultOpen">{{data.index(data[i])}}</button>
+  </div>
+  {%endfor%}
+  {%for i in range(3)%}
+  <div id = '{{data.index(data[i])}}' class="tabcontent">
+        <div class="card-header border-secondary"> <label>Q) {{data[i][0]}}</label> </div>
         <div class="card-body">
-        <input type = "radio" id = "op" name = {{i[0]}} value = 'op1'>{{i[1]}}
-        <br>
-        <input type = "radio" id = "op" name = {{i[0]}} value = 'op2'>{{i[2]}}
-        <br>
-        <input type = "radio" id = "op" name = {{i[0]}} value = 'op3'>{{i[3]}}
-        <br>
-        <input type = "radio" id = "op" name = {{i[0]}} value = 'op4'>{{i[4]}}
+          <input type = "radio" id = "op" name = {{data[i][0]}} value = 'op1'>{{data[i][1]}}
+          <br>
+          <input type = "radio" id = "op" name = {{data[i][0]}} value = 'op2'>{{data[i][2]}}
+          <br>
+          <input type = "radio" id = "op" name = {{data[i][0]}} value = 'op3'>{{data[i][3]}}
+          <br>
+          <input type = "radio" id = "op" name = {{data[i][0]}} value = 'op4'>{{data[i][4]}}
         </div>
-      </div>
+  </div>
       {%endfor%}
       <hr>
       <center>
@@ -36,6 +42,28 @@
         <input class ="btn btn-outline-secondary btn-lg" type="reset" value="Clear">
       </center>
       <hr>
-    </form>
 </div>
+<script>
+  function OpenQuestion(evt,Qname) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+    
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(Qname).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  document.getElementById("defaultOpen").click();
+</script>
 {% endblock %}

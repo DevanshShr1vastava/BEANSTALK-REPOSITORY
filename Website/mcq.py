@@ -85,7 +85,19 @@ def test():
                     else:
                         verdict = 'rst'
             if verdict == 'mo':
-                pass #add any random question
+                temp_list = []
+                for j in range(len(questions_df)):
+                    temp_list.append(questions_df['Q_ID'][j])
+                temp_list.remove(Processed_Data['Q_ID'][i])
+                if Processed_Data['Q_ID'][i] not in q_add_list:
+                    rc = random.choice(temp_list)
+                    if rc != Processed_Data['Q_ID'][i]:
+                        q_add_list.append(rc)
+                    else:
+                        continue
+                else:
+                    continue
+
             elif verdict == 'rst':
                 for j in range(len(questions_df)):
                     if (questions_df['SK_LVL'][j] == Processed_Data['SK_LVL'][i]):

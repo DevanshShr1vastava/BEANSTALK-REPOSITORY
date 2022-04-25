@@ -1,11 +1,16 @@
 <!--Here we will inherit templates using extend-->
 {% extends "base.html" %} 
 <style>
+   body {
+    background-color: black;
+    background-position: center;
+    background-size: cover;
+    }
   @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Lobster&family=Quicksand:wght@700&family=Righteous&display=swap');
 </style>
 {% block title %}The Test{% endblock %} 
 {% block content %}
-<div class="wrapper" style="background-color: 	#fffaf2">
+<div>
   <h1 align = "center" style="font-family: 'Quicksand', sans-serif;">Multiple Choice Questions</h1>
   <br>
   <h6 align = "center" style="font-family: 'Lato', sans-serif; font-style: italic;">Select the right option for each question.</h6>

@@ -1,15 +1,38 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}
 
 {% block content %} 
-<!-- <style> body { background-image: linear-gradient(rgba(255,0,0,0), ghostwhite, rgba(255,0,0,0));} </style> -->
-<style> body { background-image: url(/Website/images/forest.jpg); background-size: cover;} </style>
-<div style="padding-bottom: 10%;">
+<style> 
+body { 
+  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/ba482125835901.5634fc217636f.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:rgba(5, 5, 5, 0.479);
+  } 
+  p {
+    padding: 50px;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .description {
+    color: #29617d;
+  }
+  </style>
+
+<div class="wrapper" style="padding-bottom: 10%;">
   <center>
-    <div id="card-title">
-      <h1 style="font-family: lobster, cursive; color: #84745e; padding: 3% 0 0;"> The Beanstalk </h1>
+    <div class="title">
+      <h1 style="font-size: 100px;font-family: lobster, cursive; color: #534666;"> The Beanstalk </h1>
     </div>
-    <button type="button" class="btn btn-outline-danger btn-lg" style="margin: 23%;">
-      <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
+    <div class="description">
+      <p>The beanstalk is a tool that can be used by students aiming to appear for competitive examinations and teachers who wish to upgrade their learning or teaching methodology in order to implement strategic planning for preparation of exams in all domains.</p>
+
+      <p>The name beanstalk was chosen because of the famous fable Jack and the beanstalk where Jack finds magical beans which helps him reach different levels of achievements and to the end reaches the paradise. <br>
+        Similarly, the users of our applications shall achieve success in various educational fields 
+        and towards the end meet their self-actualization needs.
+      </p>
+    </div>
+    <button type="button" class="btn btn-outline-secondary btn-lg" style="">
+     <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
     </button>
     <hr>
     <h3 style="font-family: 'Sansita Swashed', cursive;text-decoration: underline;">Goals</h3>
@@ -25,10 +48,10 @@
     {% endfor %}
     </ul>
     <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
+      <textarea name="note" id="note" class="form-control" style="background-color: rgba(0, 0, 0, 0.492);"></textarea>
       <br>
       <div align="center">
-        <button type="submit" class="btn btn-primary"> Add Goal </button>
+        <button type="submit" class="btn btn-outline-dark"> Add Goal </button>
       </div>
     </form>
   </center>

@@ -3,7 +3,7 @@
 {% block content %} 
 <style> 
 body { 
-  background-image: linear-gradient(#e8e7e7,#9af8c6);
+  background-image: linear-gradient(#e8e7e7,#d28de08d);
   background-repeat: no-repeat;
   background-size: cover;
   background-color:rgba(5, 5, 5, 0.479);
@@ -22,7 +22,7 @@ body {
 <div class="wrapper" style="padding-bottom: 10%;">
   <center>
     <div class="title">
-      <h1 style="font-size: 100px;font-family: lobster, cursive; color: #534666;"> The Beanstalk </h1>
+      <h1 style="font-size: 100px;font-family: lobster, cursive; color:  #343d46;"> The Beanstalk </h1>
     </div>
     <div class="description">
       <p>The beanstalk is a tool that can be used by students aiming to appear for competitive examinations and teachers who wish to upgrade their learning or teaching methodology in order to implement strategic planning for preparation of exams in all domains.</p>
@@ -32,8 +32,8 @@ body {
         and towards the end meet their self-actualization needs.
       </p>
     </div>
-    <button type="button" class="btn btn-outline-secondary btn-lg" style="">
-     <a href="/mcq" style="color: black; text-decoration: none;"> Take test now!</a>
+    <button type="button" class="btn btn-outline-success btn-lg" style="">
+     <a href="/mcq" style="color: black; text-decoration: none;font-size: larger;"> Take test now!</a>
     </button>
     <hr>
     <h3 style="font-family: 'Sansita Swashed', cursive;text-decoration: underline;">Goals</h3>
@@ -49,10 +49,10 @@ body {
     {% endfor %}
     </ul>
     <form method="POST">
-      <textarea name="note" id="note" class="form-control" style="background-color: rgba(0, 0, 0, 0.492);"></textarea>
+      <textarea name="note" id="note" class="form-control" style="background-color: rgba(0, 0, 0, 0.5);"></textarea>
       <br>
-      <div align="center">
-        <button type="submit" class="btn btn-outline-dark"> Add Goal </button>
+      <div align="center" style="background-color: rgba(0, 0, 0, 0);">
+        <button type="submit" class="btn btn-outline-secondary"> Add Goal </button>
       </div>
     </form>
   </center>

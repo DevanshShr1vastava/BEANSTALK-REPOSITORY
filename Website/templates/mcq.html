@@ -24,7 +24,6 @@
           background-repeat: no-repeat;
           height: 100%;
         }
-
       </style>
     <title> {% block title %}The Test{% endblock %} </title>
  </head> 
@@ -64,12 +63,6 @@
     </form>
         {%endfor%}
         <hr>
-        <div id="countdown">
-          <p>1:00:00</p>
-        </div>
-        <hr>
-        <!-- Timer  code start -->
-       <!--Timer code end-->
         <div style="margin-bottom: 100px;">
         <center>
           <input class = "btn btn-outline-danger btn-lg" type = "submit" value = "End Test">
@@ -115,20 +108,6 @@
     }
     document.getElementById("defaultOpen").click();
 
-    //timer
-    const startingHours = 1;
-    let time= startingHours * 60;
-
-    const countdownEl =document.getElementById('countdown');
-
-    setInterval(updateCountdown,1000);
-    function updateCountdown()
-    {
-      const minutes=Math.floor(time/60);
-      let seconds = time%60;
-      countdownEl.innerHTML = '$(minutes): $(seconds)';
-      time--;
-    }
   </script>
   </body>
 </html>

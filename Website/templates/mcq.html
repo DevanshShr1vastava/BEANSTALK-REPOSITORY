@@ -24,6 +24,7 @@
           background-repeat: no-repeat;
           height: 100%;
         }
+
       </style>
     <title> {% block title %}The Test{% endblock %} </title>
  </head> 
@@ -46,11 +47,7 @@
       </div>
       {%endfor%}
     </div>
-<<<<<<< HEAD
-  <form>
-=======
     <form>
->>>>>>> c2f63b8330fe660718b6a0b1abc5cfb470e9c808
     {%for i in range(3)%}
     <div id = '{{data.index(data[i])}}' class="tabcontent card border-dark shadow p-3 mb-5 bg-white rounded">
           <div class="card-header border-secondary"> <label>Q) {{data[i][0]}}</label> </div>
@@ -64,7 +61,12 @@
             <input type = "radio" id = "op" name = {{data[i][0]}} value = 'op4'> {{data[i][4]}}
           </div>
         </div>
+    </form>
         {%endfor%}
+        <hr>
+        <div id="countdown">
+          <p>1:00:00</p>
+        </div>
         <hr>
         <!-- Timer  code start -->
        <!--Timer code end-->
@@ -74,13 +76,10 @@
           <input class ="btn btn-outline-primary btn-lg" type="reset" value="Clear">
         </center>
         </div> 
-<<<<<<< HEAD
       </div>
     </form>
-=======
    </div>
    </form>
->>>>>>> c2f63b8330fe660718b6a0b1abc5cfb470e9c808
     <nav class = "navbar navbar-expand-lg navbar-light bg-secondary fixed-bottom"><!--This is bootstrap syntax-->
       <a class="navbar-brand" href="/" style="font-family: lobster, cursive; color: ghostwhite;">Beanstalk</a>  
       <button class = "navbar-toggler" type = "button" data-toggle="collapse" data-target = "#navbar">
@@ -115,6 +114,21 @@
       evt.currentTarget.className += " active";
     }
     document.getElementById("defaultOpen").click();
+
+    //timer
+    const startingHours = 1;
+    let time= startingHours * 60;
+
+    const countdownEl =document.getElementById('countdown');
+
+    setInterval(updateCountdown,1000);
+    function updateCountdown()
+    {
+      const minutes=Math.floor(time/60);
+      let seconds = time%60;
+      countdownEl.innerHTML = '$(minutes): $(seconds)';
+      time--;
+    }
   </script>
   </body>
 </html>

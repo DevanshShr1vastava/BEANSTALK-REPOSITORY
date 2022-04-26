@@ -5,10 +5,10 @@ import functools
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px 
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 import json
 app = Flask(__name__)
-@app.route('/')
+@app.route('/',methods = ['GET','POST'])
 def try_stuff():
 
     conn = sqlite3.connect('analyse.db')
@@ -112,16 +112,27 @@ def try_stuff():
     Answer_obs_test()
     total_m = mark_a+mark_h+mark_t
     update_obs_table()
+    cur.execute("""SELECT tOTAL_m FROM OBSERVED""")
+    total_week_fl = pd.DataFrame(cur.fetchall())
     conn.commit()
     conn.close()
 
     def graph_create():
         fig = go.Figure(go.Bar(x = [mark_h,mark_t,mark_a],y = ['Hint marks','Time marks','Answer Marks'],orientation = 'h'))
-        
         graphJSON = json.dumps(fig,cls = plotly.utils.PlotlyJSONEncoder)
         return graphJSON
     bar = graph_create()
-    return render_template("test.html",plot = bar)
+    def line_graph_create():
+        fig = px.line(total_week_fl)
+        graphJSON = json.dumps(fig,cls = plotly.utils.PlotlyJSONEncoder)
+        return graphJSON
+    scline = line_graph_create()
+    selected_option = ""
+    if request.method == 'POST':
+        selected_option = request.form['option']
+        print(selected_option)
+
+    return render_template("test.html",lplot = scline, plot = bar,display = selected_option)
 
 if __name__ == "__main__":
     app.run(debug = True)

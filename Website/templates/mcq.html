@@ -61,6 +61,11 @@
             </div>
           </div>
           {%endfor%}
+          <div id ="hints">
+          <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
+          <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
+          <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Hint 3</a>
+          </div>
           <hr>
           <div style="margin-bottom: 100px;">
           <center>
@@ -85,6 +90,7 @@
     </nav>
     {% endblock %}
   <script>
+    //
     function OpenQuestion(evt,Qname) {
       // Declare all variables
       var i, tabcontent, tablinks;
@@ -107,6 +113,7 @@
     }
     document.getElementById("defaultOpen").click();
 
+    
   </script>
   </body>
 </html>

@@ -17,6 +17,7 @@ def create_app():   #function to import
     from .views import views    #to import the urls and their functions
     from .auth import auth      #same as above
     from .mcq import mcq
+    from .result import result
     
     app.register_blueprint(views,url_prefix='/')    
     #this is to register the blueprints
@@ -24,6 +25,7 @@ def create_app():   #function to import
     #this is to register the blueprints
     app.register_blueprint(mcq,url_prefix = '/')   
     #this is to register the blueprints
+    app.register_blueprint(result,url_prefix = '/')
     #we import the following to make sure that models.py file runs before we initialize or create our database
     
     from .models import User,Note

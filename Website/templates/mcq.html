@@ -42,15 +42,19 @@
         }
 
         body{
-          background-color: transparent;
+          background-color: #FAECEB;
         }
-        .container{
-            background-color: #B7CCD4;
+        .wrapper
+        {
+          background-color: #E6FFFE;
             color: #000;
             border-radius: 9px;
             padding: 20px;
             font-family: 'Montserrat', sans-serif;
-            max-width: 600px;
+            max-width: 100%;
+        }
+        .container{
+            background-color: transparent;
         }
         .container > p{
             font-size: 32px;
@@ -77,7 +81,7 @@
             left: 0;
             height: 25px;
             width: 25px;
-            background-color: #555;
+            background-color: ghostwhite;
             border: 1px solid #ddd;
             border-radius: 50%;
         }
@@ -104,12 +108,10 @@
         .options input[type="radio"]:checked ~ .checkmark:after{
             transform: translate(-50%,-50%) scale(1);
         }
-        .btn-primary{
-            background-color: #555;
-            color: #ddd;
+        .btn-info{
             border: 1px solid #ddd;
         }
-        .btn-primary:hover{
+        .btn-info:hover{
             background-color: #21bf73;
             border: 1px solid #21bf73;
         }
@@ -132,9 +134,8 @@
 
 <body>
   {% block content %}
-  <div class="container">
-    <h2>Dynamic Tabs</h2>
-    <p>MCQ Test</p>
+  <h1 align = "center" style="font-family: 'Quicksand', sans-serif; margin: 3%;">Multiple Choice Questions</h1>
+  <div class="wrapper">
     <form method = 'POST'>  
 
 <!--JavaScript for Timer ends here-->     
@@ -175,7 +176,7 @@
                 var cm = Math.round(varimp.ts1/60);
                 
                 function et1(){
-                    document.getElementById("ShowTimer1").innerHTML = "Time Elapsed " + cm + " : " + cs + " ";
+                    document.getElementById("ShowTimer1").innerHTML = "Time Elapsed " + cm + " Minutes : " + cs + " Seconds";
                     varimp.ts1 = varimp.ts1 + 1;
                     cm = Math.round(varimp.ts1/60);
                     cs = Math.round(varimp.ts1%60);
@@ -188,7 +189,7 @@
                 var cm2 = Math.round(varimp.ts2/60);
                 
                 function et2(){
-                    document.getElementById("ShowTimer2").innerHTML = "Time Elapsed " + cm2 + " : " + cs2 + " ";
+                    document.getElementById("ShowTimer2").innerHTML = "Time Elapsed " + cm2 + " Minutes : " + cs2 + " Seconds ";
                     varimp.ts2 = varimp.ts2 + 1;
                     cm2 = Math.round(varimp.ts2/60);
                     cs2 = Math.round(varimp.ts2%60);
@@ -201,7 +202,7 @@
                 var cm3 = Math.round(varimp.ts3/60);
                 
                 function et3(){
-                    document.getElementById("ShowTimer3").innerHTML = "Time Elapsed " + cm3 + " : " + cs3 + " ";
+                    document.getElementById("ShowTimer3").innerHTML = "Time Elapsed " + cm3 + " Minutes : " + cs3 + " Seconds ";
                     varimp.ts3 = varimp.ts3 + 1;
                     cm3 = Math.round(varimp.ts3/60);
                     cs3 = Math.round(varimp.ts3%60);
@@ -214,7 +215,7 @@
                 var cm4 = Math.round(varimp.ts4/60);
                 
                 function et4(){
-                    document.getElementById("ShowTimer4").innerHTML = "Time Elapsed " + cm4 + " : " + cs4 + " ";
+                    document.getElementById("ShowTimer4").innerHTML = "Time Elapsed " + cm4 + " Minutes : " + cs4 + " Seconds ";
                     varimp.ts4 = varimp.ts4 + 1;
                     cm4 = Math.round(varimp.ts4/60);
                     cs4 = Math.round(varimp.ts4%60);
@@ -382,21 +383,22 @@
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle = "tab" href ="#bys">Instructions</a></li>
-      <li><a data-toggle="tab" href="#q1" onclick = "startTimer1(this)">q1</a></li>
-      <li><a data-toggle="tab" href="#q2" onclick = "startTimer2(this)">q2</a></li>
-      <li><a data-toggle="tab" href="#q3" onclick = "startTimer3(this)">q3</a></li>
-      <li><a data-toggle="tab" href="#q4" onclick = "startTimer4(this)">q4</a></li>
+      <li><a data-toggle="tab" href="#q1" onclick = "startTimer1(this)">Q1</a></li>
+      <li><a data-toggle="tab" href="#q2" onclick = "startTimer2(this)">Q2</a></li>
+      <li><a data-toggle="tab" href="#q3" onclick = "startTimer3(this)">Q3</a></li>
+      <li><a data-toggle="tab" href="#q4" onclick = "startTimer4(this)">Q4</a></li>
     </ul>
     <div class="tab-content">
     <div id = "bys" class = "tab-pane fade in active">
         <h2>Before you start, important information here!</h2>
+        <p>You better remember to follow this!</p>
     </div>
       <div id="q1" class="tab-pane fade in ">
           <div id = "ShowTimer1"></div>
-        <h3>Q1</h3>
+        <h3>Question 1</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
-                <div class="py-2 h5"><b>Q. {{data[0][0]}}</b></div>
+                <div class="py-2 h5"><b>{{data[0][0]}}</b></div>
                 <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
                     <label class="options">{{data[0][1]}}
                         <input type="radio" id = 'r11' name="radio1" value = '{{data[0][1]}}' onclick="stopTimer1(this)">
@@ -415,7 +417,11 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection1()">Clear!</button>
+                <div class="hints">
+                  <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="First Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
+                  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Second Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
+                  <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                </div>
             </div>
             
         </div>
@@ -423,10 +429,10 @@
 
       <div id="q2" class="tab-pane fade">
         <div id = "ShowTimer2"></div>
-        <h3>Q2</h3>
+        <h3>Question 2</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
-                <div class="py-2 h5"><b>Q. {{data[1][0]}}</b></div>
+                <div class="py-2 h5"><b>{{data[1][0]}}</b></div>
                 <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
                     <label class="options">{{data[1][1]}}
                         <input type="radio" id = 'r21' name="radio2" value = {{data[1][1]}} onclick = "stopTimer2(this)">
@@ -445,17 +451,20 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection2()">Clear!</button>
+                <div class="hints">
+                  <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="First Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
+                  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Second Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
+                  <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                </div>
             </div>
-           
         </div>
       </div>
       <div id="q3" class="tab-pane fade">
         <div id = "ShowTimer3"></div>
-        <h3>Q3</h3>
+        <h3>Question 3</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
-                <div class="py-2 h5"><b>Q. {{data[2][0]}}</b></div>
+                <div class="py-2 h5"><b>{{data[2][0]}}</b></div>
                 <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
                     <label class="options">{{data[2][1]}}
                         <input type="radio" id = 'r31' name="radio3" value = {{data[2][1]}} onclick = "stopTimer3(this)">
@@ -474,17 +483,21 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection3()">Clear!</button>
+                <div class="hints">
+                  <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="First Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
+                  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Second Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
+                  <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                </div>
             </div>
             
         </div>
       </div>
       <div id="q4" class="tab-pane fade">
         <div id = "ShowTimer4"></div>
-        <h3>Q4</h3>
+        <h3>Question 4</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
-                <div class="py-2 h5"><b>Q. {{data[3][0]}}</b></div>
+                <div class="py-2 h5"><b>{{data[3][0]}}</b></div>
                 <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
                     <label class="options">{{data[3][1]}}
                         <input type="radio" id = 'r41' name="radio4" value = {{data[3][1]}} onclick = "stopTimer4(this)">
@@ -503,13 +516,18 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear!</button>
+                <div><button type="button" onclick="show1()">Hint!</button>
+                  <p id="hint1">This da hint</p>
+                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                </div>
             </div>
             
         </div>
     </div>
     </div>
-    <button class = "btn btn-primary" name = 'BTN' value = "submit" onclick="store_t_data()">Submit!</button>
+    <div align="right">
+      <button class = "btn btn-info" name = 'BTN' value = "submit" onclick="store_t_data()">Submit!</button>
+    </div>
     <input type = "hidden" id ='t1' name = 't1'>
     <input type = "hidden" id ='t2' name = 't2'>
     <input type = "hidden" id ='t3' name = 't3'>
@@ -560,16 +578,13 @@
         }
         document.getElementById("defaultOpen").click();
     
-        //Popover
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl)
-         {
-          return new bootstrap.Popover(popoverTriggerEl)
-          })
-        
-        var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
-        trigger: 'focus'
-        })
+        //Hints
+        document.getElementById('hint1').style.visibility = "hidden";
+        function show1()
+        {
+          document.getElementById("hint1").style.visibility="visible";
+        }
+
       </script>
   </body>
 </html>

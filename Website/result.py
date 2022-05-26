@@ -16,7 +16,7 @@ def try_stuff():
     cur = conn.cursor()
     cur.execute("""Select * from USER_ANALYSIS_TABLE WHERE U_ID = 101""")
     analyse_ds_df = pd.DataFrame(cur.fetchall())
-    analyse_ds_df.columns = ['U_ID','Q_ID','Sub_ID','SK_LVL','Q_Time','N_Hint',"User_Answer"]
+    analyse_ds_df.columns = ['U_ID','Q_ID','SK_LVL','Q_Time','N_Hint',"User_Answer"]
     T_hint = []
     T_Time = []
     T_Answer = []
@@ -57,7 +57,7 @@ def try_stuff():
     def Time_obs_test(): 
         global mark_t
         T_time_s = functools.reduce(lambda a, b: a+b,T_Time)
-        if T_time_s >=150 and T_time_s <=200:
+        if T_time_s <=200:
             mark_t = 10
         elif T_time_s >=201 and T_time_s <=290:
             mark_t = 9

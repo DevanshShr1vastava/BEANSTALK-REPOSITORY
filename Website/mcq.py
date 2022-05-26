@@ -1,13 +1,10 @@
 from flask import Blueprint,render_template,request,redirect,url_for
 import re
+
 from flask_login import current_user
-import sqlite3
 import pandas as pd
-import functools
-import plotly
 import plotly.graph_objects as go
 import plotly.express as px 
-import json
 mcq = Blueprint ('mcq',__name__)
 @mcq.route('/mcq',methods = ["GET","POST"])
 
@@ -121,6 +118,7 @@ def test():
             else:
                 if Processed_Data['Q_ID'][i] not in q_add_list:
                     q_add_list.append(Processed_Data['Q_ID'][i])
+        add_into_qp()
     def create_qp():
         global qp 
         qp = []
@@ -201,7 +199,6 @@ def test():
             conn.close()
     submit()
     conn.close()
-
     return render_template("mcq.html",data = qp,user = current_user) 
     #with user = current_users
     #we will be able to reference the user in our current template to check whether the user is authenticated or not

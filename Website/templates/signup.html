@@ -4,9 +4,12 @@
 {%block title %}SignUP{% endblock %}
 {%block content%}
 <!--Block for sign up page-->
+<style>
+    body {background-color: #F4F9EB;}
+</style>
 <form method = "POST">
     <h1 style="font-style: none;font-size:60px;font-family: 'Poiret One', cursive; color:  #343d46; padding: 3%;" align="center">The Beanstalk </h1>
-    <h4 align = "center">Sign Up</h4>
+    <h4 style="font-style: italic;" align = "center">Sign Up</h4>
     <div class = "form-group">
         <label for = "email">Email Address</label>
         <input type = "email" class = "form-control" id = "email" name = "email" placeholder = "Enter email"/>
@@ -41,7 +44,7 @@
     <br>
     <button type = "submit" 
     class="btn btn-primary">
-    Submit</button>
+    Sign up</button>
 </form>
 <br>
 <p>Already have an account? <a href="/login">Login</a>

@@ -19,12 +19,12 @@ def home():
         note = request.form.get('note')
 
         if len(note) < 1:
-            flash('Note is too short!' ,category ='error')
+            flash('Text is too short!' ,category ='error')
         else:
             new_note = Note(data=note, user_id=current_user.id)
             db.session.add(new_note)
             db.session.commit()
-            flash('Note added!', category='success')
+            flash('Goal added!', category='success')
     return render_template("home.html", user=current_user)
 
 

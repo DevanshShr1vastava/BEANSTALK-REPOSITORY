@@ -42,11 +42,11 @@
         }
 
         body{
-          background-color: #FAECEB;
+          background-color: #A1B7E1;
         }
         .wrapper
         {
-          background-color: #E6FFFE;
+          background-color: #E7EFFE;
             color: #000;
             border-radius: 9px;
             padding: 20px;
@@ -66,6 +66,10 @@
             position: relative;
             padding-left: 40px;
         }
+        ul .nav
+        {
+          color: pink;
+        } 
         #options label{
             display: block;
             margin-bottom: 15px;
@@ -82,7 +86,7 @@
             height: 25px;
             width: 25px;
             background-color: ghostwhite;
-            border: 1px solid #ddd;
+            border: 1px solid #fff;
             border-radius: 50%;
         }
         .options input:checked ~ .checkmark:after {
@@ -93,7 +97,7 @@
             width: 10px;
             height: 10px;
             display: block;
-            background: white;
+            background: #fff;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -109,7 +113,7 @@
             transform: translate(-50%,-50%) scale(1);
         }
         .btn-info{
-            border: 1px solid #ddd;
+            border: 1px solid #fff;
         }
         .btn-info:hover{
             background-color: #21bf73;
@@ -160,7 +164,7 @@
         }                
         timer = setTimeout(CheckTime, 1000); //after every one second the function will run
     </script>
-    <div id = "quiz-time-left"></div>
+    <div id = "quiz-time-left" align="center"></div>
         <script>
             class varimp{
                 static ts1 = 0;
@@ -395,7 +399,7 @@
     </div>
       <div id="q1" class="tab-pane fade in ">
           <div id = "ShowTimer1"></div>
-        <h3>Question 1</h3>
+        <h3 align="center">Question 1</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
                 <div class="py-2 h5"><b>{{data[0][0]}}</b></div>
@@ -417,10 +421,10 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div class="hints">
-                  <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="First Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
-                  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Second Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
+                <div>
                   <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                  <button type="button" onclick="show1()">Hint!</button>
+                  <p id="hint1">This da hint</p>
                 </div>
             </div>
             
@@ -429,7 +433,7 @@
 
       <div id="q2" class="tab-pane fade">
         <div id = "ShowTimer2"></div>
-        <h3>Question 2</h3>
+        <h3 align="center">Question 2</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
                 <div class="py-2 h5"><b>{{data[1][0]}}</b></div>
@@ -451,17 +455,17 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div class="hints">
-                  <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="First Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
-                  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Second Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
-                  <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                <div>
+                  <button type="button" onclick="show1()">Hint!</button>
+                  <p id="hint1">This da hint</p>
                 </div>
             </div>
         </div>
       </div>
       <div id="q3" class="tab-pane fade">
         <div id = "ShowTimer3"></div>
-        <h3>Question 3</h3>
+        <h3 align="center">Question 3</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
                 <div class="py-2 h5"><b>{{data[2][0]}}</b></div>
@@ -483,10 +487,10 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div class="hints">
-                  <a tabindex="0" class="btn btn-lg btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="First Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 1</a>
-                  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Second Hint" data-bs-content="And here's some amazing content. It's very engaging. Right?">Hint 2</a>
-                  <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                <div>
+                  <button type="button" onclick="show1()">Hint!</button>
+                  <p id="hint1">This da hint</p>
                 </div>
             </div>
             
@@ -494,7 +498,7 @@
       </div>
       <div id="q4" class="tab-pane fade">
         <div id = "ShowTimer4"></div>
-        <h3>Question 4</h3>
+        <h3 align="center">Question 4</h3>
         <div class="container mt-sm-5 my-1">
             <div class="question ml-sm-5 pl-sm-5 pt-2">
                 <div class="py-2 h5"><b>{{data[3][0]}}</b></div>
@@ -516,9 +520,16 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div><button type="button" onclick="show1()">Hint!</button>
-                  <p id="hint1">This da hint</p>
                 <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
+                <div>
+                  <input type = "hidden" id ='t1' name = 't1'>
+                  <input type = "hidden" id ='t2' name = 't2'>
+                  <input type = "hidden" id ='t3' name = 't3'>
+                  <input type = "hidden" id ='t4' name = 't4'>
+                  <input type = "hidden" id = 'hc1' name = 'hc1'>
+                  <input type = "hidden" id = 'hc2' name = 'hc2'>
+                  <input type = "hidden" id = 'hc3' name = 'hc3'>
+                  <input type = "hidden" id = 'hc4' name = 'hc4'>
                 </div>
             </div>
             
@@ -579,11 +590,16 @@
         document.getElementById("defaultOpen").click();
     
         //Hints
-        document.getElementById('hint1').style.visibility = "hidden";
-        function show1()
-        {
-          document.getElementById("hint1").style.visibility="visible";
-        }
+        function store_t_data(){
+                        document.getElementById('t1').value = varimp.ts1;
+                        document.getElementById('t2').value = varimp.ts2;
+                        document.getElementById('t3').value = varimp.ts3;
+                        document.getElementById('t4').value = varimp.ts4;
+                        document.getElementById('hc1').value = varimp.hc1;
+                        document.getElementById('hc2').value = varimp.hc2;
+                        document.getElementById('hc3').value = varimp.hc3;
+                        document.getElementById('hc4').value = varimp.hc4;
+                    }store_t_data();
 
       </script>
   </body>

@@ -8,11 +8,11 @@ import plotly.express as px
 from flask import Blueprint, Flask, render_template,request
 import json
 
-app = Flask(__name__)
+result = Flask(__name__)
 result = Blueprint('result',__name__)
-@app.route('/result',methods = ['GET','POST'])
-def try_stuff():
+@result.route('/result',methods = ['GET','POST'])
 
+def try_stuff():
     conn = sqlite3.connect('analyse.db')
     cur = conn.cursor()
     cur.execute("""Select * from USER_ANALYSIS_TABLE WHERE U_ID = 101""")

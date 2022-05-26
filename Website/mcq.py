@@ -1,5 +1,6 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,request
 import re
+
 from flask_login import current_user
 mcq = Blueprint ('mcq',__name__)
 @mcq.route('/mcq',methods = ["GET","POST"])
@@ -114,6 +115,7 @@ def test():
             else:
                 if Processed_Data['Q_ID'][i] not in q_add_list:
                     q_add_list.append(Processed_Data['Q_ID'][i])
+        add_into_qp()
     def create_qp():
         global qp 
         qp = []
@@ -134,7 +136,6 @@ def test():
             cur.execute("""SELECT answer from QB_TABLE where Q_ID = ?""",(i,))
             answer = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             qp.append([question,op1,op2,op3,op4,answer])
-
     def randomize_values():
         cur.execute("""DELETE FROM PROCESSED_DATA""")
         teno_list = ['rst','mo','rsq']
@@ -147,7 +148,7 @@ def test():
             rc_2 = random.choice(teno_list)
             rc_3 = random.choice(teno_list)
             cur.execute("""INSERT INTO PROCESSED_DATA VALUES(?,?,?,?,?,?,?)""",(int(user_id),subject_id,question_id,rc_1,rc_2,rc_3,int(Sk_lvl)))
-        conn.commit()
+
 
     print(analyse_ds_df)
     randomize_values()
@@ -158,7 +159,6 @@ def test():
 
     conn.commit()
     conn.close()
-
     return render_template("mcq.html",data = qp,user = current_user) 
     #with user = current_users
     #we will be able to reference the user in our current template to check whether the user is authenticated or not

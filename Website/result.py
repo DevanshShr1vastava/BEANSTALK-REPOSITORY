@@ -1,16 +1,15 @@
 import sqlite3
-from turtle import update
+from flask_login import current_user
 import pandas as pd
 import functools
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px 
-from flask import Blueprint, Flask, render_template,request
+from flask import Blueprint, render_template,request
 import json
 
-app = Flask(__name__)
 result = Blueprint('result',__name__)
-@app.route('/result',methods = ['GET','POST'])
+@result.route('/result',methods = ['GET','POST'])
 def try_stuff():
 
     conn = sqlite3.connect('analyse.db')
@@ -134,4 +133,4 @@ def try_stuff():
         selected_option = request.form['option']
         print(selected_option)
 
-    return render_template("result.html",lplot = scline, plot = bar,display = selected_option)
+    return render_template("result.html",lplot = scline, plot = bar,display = selected_option,user = current_user)

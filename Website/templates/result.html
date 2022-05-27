@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block content %} 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,6 +46,8 @@
             Plotly.plot('line',graphs,{});
         </script>
     </div>
+    {{display}}
+
     </div>
     <nav class = "navbar navbar-expand-lg navbar-dark bg-dark" ><!--This is bootstrap syntax-->
         <a class="navbar-brand" href="/" style="font-family: 'Poiret One', cursive; color: ghostwhite;">Beanstalk</a>  
@@ -58,4 +61,4 @@
             </div>
       </nav>
 </body>
-</html>
+{%endblock%}

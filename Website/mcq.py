@@ -1,7 +1,10 @@
-from flask import Blueprint,render_template,request
+from flask import Blueprint,render_template,request,redirect,url_for
 import re
 
 from flask_login import current_user
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.express as px 
 mcq = Blueprint ('mcq',__name__)
 @mcq.route('/mcq',methods = ["GET","POST"])
 
@@ -38,28 +41,28 @@ def test():
 
     cur.execute("""Select * from QB_TABLE""")
     questions_df = pd.DataFrame(cur.fetchall())
-    questions_df.columns = ['Q_ID','Sub_ID','SK_LVL','Question','Op1','Op2','Op3','Op4','Answer']
+    questions_df.columns = ['Q_ID','Sub_ID','SK_LVL','Question','Op1','Op2','Op3','Op4','Answer','Hint1','Hint2']
     cur.execute("""Select * from USER_ANALYSIS_TABLE""")
     analyse_ds_df = pd.DataFrame(cur.fetchall())
-    analyse_ds_df.columns = ['U_ID','Q_ID','Sub_ID','SK_LVL','Q_Time','N_Hint',"User_Answer"]
+    analyse_ds_df.columns = ['U_ID','Q_ID','SK_LVL','Q_Time','N_Hint',"User_Answer"]
 
 
     def update_processed_data():
         cur.execute("""DELETE FROM PROCESSED_DATA""")
         for i in range(len(analyse_ds_df)):
             user_id = analyse_ds_df['U_ID'][i]
-            subject_id = analyse_ds_df['Sub_ID'][i]
+            
             question_id = analyse_ds_df['Q_ID'][i]
             q_hint_test(analyse_ds_df['N_Hint'][i])
             q_time_test(analyse_ds_df['Q_Time'][i])
             answer_test(analyse_ds_df['User_Answer'][i])
             Sk_lvl = analyse_ds_df['SK_LVL'][i]
-            cur.execute("""INSERT INTO PROCESSED_DATA VALUES(?,?,?,?,?,?,?)""",(int(user_id),subject_id,question_id,H_obs,T_obs,A_obs,int(Sk_lvl)))
+            cur.execute("""INSERT INTO PROCESSED_DATA VALUES(?,?,?,?,?,?)""",(int(user_id),question_id,H_obs,T_obs,A_obs,int(Sk_lvl)))
         conn.commit()
-
+    update_processed_data()
     cur.execute("""SELECT * FROM PROCESSED_DATA""")
     Processed_Data = pd.DataFrame(cur.fetchall())
-    Processed_Data.columns = ['U_ID','Sub_ID','Q_ID','H_Obs','T_Obs','A_Obs','SK_LVL']
+    Processed_Data.columns = ['U_ID','Q_ID','H_Obs','T_Obs','A_Obs','SK_LVL']
 
 
     def add_into_qp():
@@ -135,29 +138,66 @@ def test():
             op4 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
             cur.execute("""SELECT answer from QB_TABLE where Q_ID = ?""",(i,))
             answer = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
-            qp.append([question,op1,op2,op3,op4,answer])
-    def randomize_values():
-        cur.execute("""DELETE FROM PROCESSED_DATA""")
-        teno_list = ['rst','mo','rsq']
-        for i in range(len(analyse_ds_df)):
-            user_id = analyse_ds_df['U_ID'][i]
-            subject_id = analyse_ds_df['Sub_ID'][i]
-            question_id = analyse_ds_df['Q_ID'][i]
-            Sk_lvl = analyse_ds_df['SK_LVL'][i]
-            rc_1 = random.choice(teno_list)
-            rc_2 = random.choice(teno_list)
-            rc_3 = random.choice(teno_list)
-            cur.execute("""INSERT INTO PROCESSED_DATA VALUES(?,?,?,?,?,?,?)""",(int(user_id),subject_id,question_id,rc_1,rc_2,rc_3,int(Sk_lvl)))
+            cur.execute("""SELECT Hint1 from QB_TABLE where Q_ID = ?""",(i,))
+            hint1 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
+            cur.execute("""SELECT Hint2 from QB_TABLE where Q_ID = ?""",(i,))
+            hint2 = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
+            cur.execute("""SELECT Q_ID FROM QB_TABLE WHERE Q_ID = ?""",(i,))
+            qid = re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone())))
+            qp.append([question,op1,op2,op3,op4,answer,hint1,hint2,qid])
 
-
-    print(analyse_ds_df)
-    randomize_values()
-    print(Processed_Data)
-    add_into_qp()
-    print(q_add_list)
+    update_processed_data()
+    add_into_qp() 
     create_qp()
-
-    conn.commit()
+    print(q_add_list)
+    print(Processed_Data)
+    print(analyse_ds_df)   
+    def submit():
+        if request.method == "POST":
+            if request.form['BTN'] == "submit":
+                cur.execute("""DELETE FROM USER_ANALYSIS_TABLE""")
+                print("Submit Pressed!")
+                ans2 = request.form.get('radio2')
+                ans3 = request.form.get('radio3')
+                ans4 = request.form.get('radio4')
+                ans1 = request.form.get('radio1')
+                if (qp[0][5] == ans1):
+                    ansre1 = 1
+                else:
+                    ansre1 = 0
+                if (qp[1][5] == ans2):
+                    ansre2 = 1
+                else:
+                    ansre2 = 0
+                if (qp[2][5] == ans3):
+                    ansre3 = 1
+                else:
+                    ansre3 = 0
+                if (qp[3][5] == ans4):
+                    ansre4 = 1
+                else:
+                    ansre4 = 0    
+                anslist = [ansre1,ansre2,ansre3,ansre4]
+                print(ansre1," ",ansre2," ",ansre3," ",ansre4)
+                timelist = [request.form.get('t1'), request.form.get('t2'), request.form.get('t3'),request.form.get('t4')]
+                print(timelist[0]," ", timelist[1]," ", timelist[2]," " ,timelist[3]," ")
+                hintclist = [request.form.get('hc1'),request.form.get('hc2'),request.form.get('hc3'),request.form.get('hc2')]
+                print(hintclist[0]," ",hintclist[1]," ",hintclist[2]," ",hintclist[3])
+                total_time_elapsed = request.form.get('tte')
+                print(total_time_elapsed)
+                patt1 = r"""[[(][']|[(]["]"""
+                patt2 = r"""['][,][)]|["][,][)]"""
+                for i in range(4):
+                    q_id = qp[i][8]
+                    cur.execute("""select SK_LVL FROM QB_TABLE where Q_ID = (?)""",(qp[i][8],))
+                    sk_lvl = int(re.sub(r"[(]","",re.sub(r"[,][)]","",re.sub(patt1,"",re.sub(patt2,"",repr(cur.fetchone()))))))
+                    hintc = hintclist[i]
+                    timec = timelist[i]
+                    ansc = anslist[i]
+                    cur.execute("""INSERT INTO USER_ANALYSIS_TABLE VALUES (?,?,?,?,?,?)""",(101,q_id,sk_lvl,hintc,timec,ansc))
+            conn.commit()
+            conn.close()
+    submit()
     conn.close()
     return render_template("mcq.html",data = qp,user = current_user) 
     #with user = current_users

@@ -133,47 +133,97 @@
     <title> {% block title %}The Test{% endblock %} </title>
  </head> 
 
-
-
-
 <body>
   {% block content %}
   <h1 align = "center" style="font-family: 'Quicksand', sans-serif; margin: 3%;">Multiple Choice Questions</h1>
   <div class="wrapper">
     <form method = 'POST'>  
-
-<!--JavaScript for Timer ends here-->     
-      <script>
-        var total_seconds = 10 * 1;
-        var c_minutes = parseInt(total_seconds / 60);
-        var c_seconds = parseInt(total_seconds % 60);
-        var timer;
-
-        function CheckTime() {
-            if (total_seconds <= 0){
-                document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + c_minutes + ' minutes ' + c_seconds + ' seconds ';
-            }
-        else{
-
-            document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + c_minutes + ' minutes ' + c_seconds + ' seconds ';   //the display statement
-            total_seconds = total_seconds - 1; //updating value of total seconds
-            c_minutes = parseInt(total_seconds / 60);  //updating the value of minute
-            c_seconds = parseInt(total_seconds % 60);  //updating the value of seconds
-            timer = setTimeout(CheckTime, 1000); //after every one second the function CheckTime will run
+<!--alert stuff-->
+<style>
+    .alert {
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+      opacity: 1;
+      transition: opacity 0.6s;
+      margin-bottom: 15px;
+    }
+    
+    .alert.success {background-color: #04AA6D;}
+    .alert.info {background-color: #2196F3;}
+    .alert.warning {background-color: #ff9800;}
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+    <script>
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+        
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+          }
         }
-        }                
-        timer = setTimeout(CheckTime, 1000); //after every one second the function will run
-    </script>
-    <div id = "quiz-time-left" align="center"></div>
+        </script>
+        <div class="alert" id = "alertBox" style = "visibility: hidden;">
+            <span class="closebtn">&times;</span>  
+            <strong>Alert!</strong> Time for test over. Automatic Submission in 5 seconds
+          </div>
+<!--JavaScript for Timer ends here-->     
+    <div id = "quiz-time-left"></div>
         <script>
             class varimp{
                 static ts1 = 0;
                 static ts2 = 0;
                 static ts3 = 0;
                 static ts4 = 0;
+                static hc1 = 0;
+                static hc2 = 0;
+                static hc3 = 0;
+                static hc4 = 0;
+                static total_seconds = 600 * 1;
             }
-            
-
+            function startTimermain(){
+                document.getElementById('startbtn').style.visibility = 'hidden';
+                document.getElementById('submit_button').style.visibility = 'visible';
+                var c_minutes = parseInt(varimp.total_seconds / 60);
+                    var c_seconds = parseInt(varimp.total_seconds % 60);
+                    var timer;
+    
+                    function CheckTime() {
+                        if (varimp.total_seconds <= 0){
+                            document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + c_minutes + ' minutes ' + c_seconds + ' seconds ';
+                            document.getElementById('alertBox').style.visibility='visible';
+                            setInterval(function() {document.getElementById('submit_button').click()},5000)
+                        }
+                    else{
+    
+                        document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + c_minutes + ' minutes ' + c_seconds + ' seconds ';   //the display statement
+                        varimp.total_seconds = varimp.total_seconds - 1; //updating value of total seconds
+                        c_minutes = parseInt(varimp.total_seconds / 60);  //updating the value of minute
+                        c_seconds = parseInt(varimp.total_seconds % 60);  //updating the value of seconds
+                        timer = setTimeout(CheckTime, 1000); //after every one second the function CheckTime will run
+                    }
+                    }                
+                    timer = setTimeout(CheckTime, 1000); //after every one second the function will run  
+                    
+                
+            }
             function startTimer1(){
                 
                 var cs = Math.round(varimp.ts1%60);
@@ -336,6 +386,7 @@
             }
 
             function clearSelection1(){
+                
                 var ele = document.getElementsByName("radio1");
                 for(var i=0;i<ele.length;i++)
                    ele[i].checked = false;
@@ -345,6 +396,7 @@
                 document.getElementById('r14').disabled = false; 
             }
             function clearSelection2(){
+                
                 var ele2 = document.getElementsByName("radio2");
                 for(var i=0;i<ele2.length;i++)
                    ele2[i].checked = false;
@@ -355,6 +407,7 @@
                 document.getElementById('r24').disabled = false; 
             }
             function clearSelection3(){
+                
                 var ele3 = document.getElementsByName("radio3");
                 for(var i=0;i<ele3.length;i++)
                    ele3[i].checked = false;
@@ -365,6 +418,7 @@
                 document.getElementById('r34').disabled = false; 
             }
             function clearSelection4(){
+                
                 var ele4 = document.getElementsByName("radio4");
                 for(var i=0;i<ele4.length;i++)
                    ele4[i].checked = false;
@@ -374,12 +428,50 @@
                 document.getElementById('r43').disabled = false;
                 document.getElementById('r44').disabled = false; 
             }
+            function showhint1_1(){
+                varimp.hc1 = 1;
+                document.getElementById("hint1_1").style.visibility="visible";
+              }
+              function showhint2_1(){
+                varimp.hc2 = 1;
+                document.getElementById("hint2_1").style.visibility="visible";
+              }
+              function showhint3_1(){
+                varimp.hc3 = 1;
+                document.getElementById("hint3_1").style.visibility="visible";
+              }
+              function showhint4_1(){
+                varimp.hc4 = 1;
+                document.getElementById("hint4_1").style.visibility="visible";
+              }
+              function showhint1_2(){
+                varimp.hc1 = 2;
+                document.getElementById("hint1_2").style.visibility="visible";
+              }
+              function showhint2_2(){
+                varimp.hc2 = 2;
+                document.getElementById("hint2_2").style.visibility="visible";
+              }
+              function showhint3_2(){
+                varimp.hc3 = 2;
+                document.getElementById("hint3_2").style.visibility="visible";
+              }
+              function showhint4_2(){
+                varimp.hc4 = 2;
+                document.getElementById("hint4_2").style.visibility="visible";
+              }
             function store_t_data(){
                 document.getElementById('t1').value = varimp.ts1;
                 document.getElementById('t2').value = varimp.ts2;
                 document.getElementById('t3').value = varimp.ts3;
                 document.getElementById('t4').value = varimp.ts4;
-            }store_t_data();
+                document.getElementById('hc1').value = varimp.hc1;
+                document.getElementById('hc2').value = varimp.hc2;
+                document.getElementById('hc3').value = varimp.hc3;
+                document.getElementById('hc4').value = varimp.hc4;
+                document.getElementById('tte').value = varimp.total_seconds;
+                window.location = "127.0.0.1:5000/result";
+            }
              
         </script>
 <!--JavaScript for Timer ends here-->       
@@ -395,7 +487,13 @@
     <div class="tab-content">
     <div id = "bys" class = "tab-pane fade in active">
         <h2>Before you start, important information here!</h2>
-        <p>You better remember to follow this!</p>
+        <p><ul>
+            <li>The main timer will start only when you click Start</li>
+            <li>Once an option is selected The Timer for that question will stop</li>
+            <li>When you go back to a question, its timer will start again</li>
+            <li>To re select another option, select Clear Response</li>
+            <li>Click on submit to submit the test</li>
+        </ul></p>
     </div>
       <div id="q1" class="tab-pane fade in ">
           <div id = "ShowTimer1"></div>
@@ -421,10 +519,12 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div>
-                  <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
-                  <button type="button" onclick="show1()">Hint!</button>
-                  <p id="hint1">This da hint</p>
+                <div class="hints">
+                    <button type="button" class = "btn btn-info" onclick="showhint1_1()">Hint 1</button>
+                    <p id="hint1_1" class="p-3 mb-2 bg-success text-white" style = "visibility : hidden">{{data[0][6]}}</p>
+                    <button type="button" class = "btn btn-info" onclick="showhint1_2()">Hint 2</button>
+                    <p id="hint1_2" class="p-3 mb-2 bg-success text-white" style = "visibility : hidden">{{data[0][7]}}</p>
+                    <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection1()">Clear Response</button>
                 </div>
             </div>
             
@@ -455,10 +555,12 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
-                <div>
-                  <button type="button" onclick="show1()">Hint!</button>
-                  <p id="hint1">This da hint</p>
+                <div class="hints">
+                    <button type="button" class = "btn btn-info" onclick="showhint2_1()">Hint 1</button>
+                    <p id="hint2_1" style = "visibility : hidden">{{data[1][6]}}</p>
+                    <button type="button" class = "btn btn-info" onclick="showhint2_2()">Hint 2</button>
+                    <p id="hint2_2" style = "visibility : hidden">{{data[1][7]}}</p>
+                    <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection2()">Clear Response</button>
                 </div>
             </div>
         </div>
@@ -487,10 +589,12 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
-                <div>
-                  <button type="button" onclick="show1()">Hint!</button>
-                  <p id="hint1">This da hint</p>
+                <div class="hints">
+                    <button type="button" class = "btn btn-info" onclick="showhint3_1()">Hint 1</button>
+                    <p id="hint3_1" style = "visibility : hidden">{{data[2][6]}}</p>
+                    <button type="button" class = "btn btn-info" onclick="showhint3_2()">Hint 2</button>
+                    <p id="hint3_2" style = "visibility : hidden">{{data[2][7]}}</p>
+                    <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection3()">Clear Response</button>
                 </div>
             </div>
             
@@ -520,16 +624,12 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
                 <div>
-                  <input type = "hidden" id ='t1' name = 't1'>
-                  <input type = "hidden" id ='t2' name = 't2'>
-                  <input type = "hidden" id ='t3' name = 't3'>
-                  <input type = "hidden" id ='t4' name = 't4'>
-                  <input type = "hidden" id = 'hc1' name = 'hc1'>
-                  <input type = "hidden" id = 'hc2' name = 'hc2'>
-                  <input type = "hidden" id = 'hc3' name = 'hc3'>
-                  <input type = "hidden" id = 'hc4' name = 'hc4'>
+                    <button type="button" class = "btn btn-info" onclick="showhint4_1()">Hint 1</button>
+                    <p id="hint4_1" style = "visibility : hidden">{{data[3][6]}}</p>
+                    <button type="button" class = "btn btn-info" onclick="showhint4_2()">Hint 2</button>
+                    <p id="hint4_2" style = "visibility : hidden">{{data[3][7]}}</p>
+                    <button class = 'btn btn-danger' type ="button" id = 'btnalign' name = 'BTN' value = "clear" onclick="clearSelection4()">Clear Response</button>
                 </div>
             </div>
             
@@ -537,12 +637,18 @@
     </div>
     </div>
     <div align="right">
-      <button class = "btn btn-info" name = 'BTN' value = "submit" onclick="store_t_data()">Submit!</button>
+        <button class = "btn btn-info" id = 'startbtn' style = "visibility:visible" name = 'StartBTN' type = "button" onclick="startTimermain()">START!</button>
+        <button class = "btn btn-info" style = "visibility:hidden" name = 'BTN' value = "submit" id="submit_button" onclick="store_t_data()">Submit!</button>
     </div>
     <input type = "hidden" id ='t1' name = 't1'>
     <input type = "hidden" id ='t2' name = 't2'>
     <input type = "hidden" id ='t3' name = 't3'>
     <input type = "hidden" id ='t4' name = 't4'>
+    <input type = "hidden" id = 'hc1' name = 'hc1'>
+    <input type = "hidden" id = 'hc2' name = 'hc2'>
+    <input type = "hidden" id = 'hc3' name = 'hc3'>
+    <input type = "hidden" id = 'hc4' name = 'hc4'>
+    <input type = "hidden" id = 'tte' name = 'tte'>
     <style>
         #btnalign{
             float: right
@@ -551,8 +657,6 @@
     
 </form>
   </div>
-
-
     <nav class = "navbar navbar-expand-lg navbar-dark navbar-fixed-bottom bg-dark" ><!--This is bootstrap syntax-->
       <a class="navbar-brand" href="/" style="font-family: 'Poiret One', cursive; color: ghostwhite;">Beanstalk</a>  
       <button class = "navbar-toggler" type = "button" data-toggle="collapse" data-target = "#navbar">
@@ -565,42 +669,5 @@
           </div>
     </nav>
     {% endblock %}
-      <script>
-        //Script for Hints
-        function OpenQuestion(evt,Qname) {
-          // Declare all variables
-          var i, tabcontent, tablinks;
-          
-          // Get all elements with class="tabcontent" and hide them
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          
-          // Get all elements with class="tablinks" and remove the class "active"
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          
-          // Show the current tab, and add an "active" class to the button that opened the tab
-          document.getElementById(Qname).style.display = "block";
-          evt.currentTarget.className += " active";
-        }
-        document.getElementById("defaultOpen").click();
-    
-        //Hints
-        function store_t_data(){
-                        document.getElementById('t1').value = varimp.ts1;
-                        document.getElementById('t2').value = varimp.ts2;
-                        document.getElementById('t3').value = varimp.ts3;
-                        document.getElementById('t4').value = varimp.ts4;
-                        document.getElementById('hc1').value = varimp.hc1;
-                        document.getElementById('hc2').value = varimp.hc2;
-                        document.getElementById('hc3').value = varimp.hc3;
-                        document.getElementById('hc4').value = varimp.hc4;
-                    }store_t_data();
-
-      </script>
   </body>
 </html>

@@ -1,23 +1,22 @@
 import sqlite3
-from turtle import update
+from flask_login import current_user
 import pandas as pd
 import functools
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px 
-from flask import Blueprint, Flask, render_template,request
+from flask import Blueprint, render_template,request
 import json
 
-result = Flask(__name__)
 result = Blueprint('result',__name__)
 @result.route('/result',methods = ['GET','POST'])
-
 def try_stuff():
+
     conn = sqlite3.connect('analyse.db')
     cur = conn.cursor()
     cur.execute("""Select * from USER_ANALYSIS_TABLE WHERE U_ID = 101""")
     analyse_ds_df = pd.DataFrame(cur.fetchall())
-    analyse_ds_df.columns = ['U_ID','Q_ID','Sub_ID','SK_LVL','Q_Time','N_Hint',"User_Answer"]
+    analyse_ds_df.columns = ['U_ID','Q_ID','SK_LVL','Q_Time','N_Hint',"User_Answer"]
     T_hint = []
     T_Time = []
     T_Answer = []
@@ -58,7 +57,7 @@ def try_stuff():
     def Time_obs_test(): 
         global mark_t
         T_time_s = functools.reduce(lambda a, b: a+b,T_Time)
-        if T_time_s >=150 and T_time_s <=200:
+        if T_time_s <=200:
             mark_t = 10
         elif T_time_s >=201 and T_time_s <=290:
             mark_t = 9
@@ -134,4 +133,4 @@ def try_stuff():
         selected_option = request.form['option']
         print(selected_option)
 
-    return render_template("result.html",lplot = scline, plot = bar,display = selected_option)
+    return render_template("result.html",lplot = scline, plot = bar,display = selected_option,user = current_user)
